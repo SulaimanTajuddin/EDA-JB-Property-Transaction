@@ -1,0 +1,48 @@
+EVALUATE
+	ROW(
+		"Table", "Masai Transacted Proper ty",
+		"Column", "Transaction Price",
+		"Count", COUNT('Masai Transacted Property'[Transaction Price]),
+		"Distinct Values", DISTINCTCOUNTNOBLANK('Masai Transacted Property'[Transaction Price]),
+		"Null Count", COUNTROWS('Masai Transacted Property') - COUNT('Masai Transacted Property'[Transaction Price]),
+		"Min", MIN('Masai Transacted Property'[Transaction Price]),
+		"Max", MAX('Masai Transacted Property'[Transaction Price]),
+		"Median", MEDIAN('Masai Transacted Property'[Transaction Price]),
+		"Mean", AVERAGE('Masai Transacted Property'[Transaction Price]),
+		"Standard Deviation", STDEV.P('Masai Transacted Property'[Transaction Price]),
+		"Zeros", COALESCE(
+			COUNTROWS(FILTER(
+				'Masai Transacted Property',
+				'Masai Transacted Property'[Transaction Price] = 0
+			)),
+			0
+		),
+		"Evens", COALESCE(
+			COUNTROWS(FILTER(
+				'Masai Transacted Property',
+				MOD(
+					'Masai Transacted Property'[Transaction Price],
+					2
+				) = 0
+			)),
+			0
+		),
+		"Odds", COALESCE(
+			COUNTROWS(FILTER(
+				'Masai Transacted Property',
+				MOD(
+					'Masai Transacted Property'[Transaction Price],
+					2
+				) <> 0
+			)),
+			0
+		),
+		"P25", PERCENTILE.INC(
+			'Masai Transacted Property'[Transaction Price],
+			0.25
+		),
+		"P75", PERCENTILE.INC(
+			'Masai Transacted Property'[Transaction Price],
+			0.75
+		)
+	)
