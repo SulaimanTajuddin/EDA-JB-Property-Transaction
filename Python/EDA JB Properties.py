@@ -1,15 +1,7 @@
-import chardet # for automatically detect the character encoding of files
 import pandas as pd # for data manipulation and analysis
 import matplotlib.pyplot as plt
 
-# Detect the encoding
-with open('JB Properties Data 2021-2024 (TSV).csv', 'rb') as f: # rb: read binary mode
-    result = chardet.detect(f.read()) # analyzes the raw bytes to guess the character encoding
-    print(f"Detected encoding: {result['encoding']}") # print the encoding result
-
-# Load TSV with detected encoding
-df = pd.read_csv('JB Properties Data 2021-2024 (TSV).csv', sep='\t', encoding=result['encoding'])
-
+df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
 #---------------------------------------------------------------------------------------------------------------------
 '''
 # Overview of raw data + Data inspection:
@@ -20,6 +12,7 @@ print("\n(Total no. of rows, Total no. of columns) = " + f"{df.shape}")
 print("\nNull values (True/False):\n") 
 print(df.isnull())                     # Check for null values in all cell, returns print output True/False for each cell
 print("\nTotal sum of duplicated values = " + f"{df.duplicated().sum()}\n")
+
 '''
 #---------------------------------------------------------------------------------------------------------------------
 # Data cleansing and filtering starts here:
@@ -48,6 +41,8 @@ summary_by_year = filtered_df.groupby('Transaction Year')['Transaction Price'].a
 # Step 2: Display result
 print(summary_by_year)
 
-# Step 3: Visualization
+
+
+
 
 
