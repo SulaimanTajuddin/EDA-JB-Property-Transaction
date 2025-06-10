@@ -1,5 +1,5 @@
 import pandas as pd # for data manipulation and analysis
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # for plotting graph
 
 df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
 
@@ -10,8 +10,8 @@ df.columns = df.columns.str.strip() # The strip() method removes any leading and
 df['Transaction Year'] = df['Month, Year of Transaction Date'].str.extract(r'(\d{4})').astype(int)
 
 # Step 3:Clean and convert 'Transaction Price' to numeric 
-df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False)
-df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float)
+df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False) # remove string 'RM'
+df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float) # remove string ',' and convert to float values
 
 # Step 4: Filter data for the years 2021 to 2024
 filtered_df = df[df['Transaction Year'].isin([2021, 2022, 2023, 2024])]
@@ -23,6 +23,14 @@ summary_by_year = filtered_df.groupby('Transaction Year')['Transaction Price'].a
 
 # Step 6: Display result
 print(summary_by_year)
+
+# Visualize using histogram
+plt.hist((summary_by_year['Median']), bins=30, color='skyblue', edgecolor='black')
+plt.title('Distribution of Transaction Price from 2021 - 2024 ')
+plt.xlabel('Transaction Price')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
 
 
 

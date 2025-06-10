@@ -14,7 +14,10 @@ print("\nColumn after stripped :\n " + f"{df.columns.tolist()}\n") # output afte
 df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False)
 df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float)
 
-#V isualize using box plot
+print(df.head(10))
+
+'''
+# Visualize using box plot
 sns.boxplot(df['Transaction Price'])
 plt.show()
 
@@ -24,7 +27,7 @@ ax.scatter(df['Mukim'], df['Transaction Price'])
 ax.set_xlabel('(Mukim)')
 ax.set_ylabel('(Transaction Price)')
 plt.show()
-
+'''
 # Visualize using histogram
 plt.hist(df['Transaction Price'], bins=30, color='skyblue', edgecolor='black')
 plt.title('Distribution of Transaction Price')
