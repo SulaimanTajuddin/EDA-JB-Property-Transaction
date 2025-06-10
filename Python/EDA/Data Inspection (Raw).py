@@ -20,4 +20,3 @@ print("\n(Total no. of rows, Total no. of columns) = " + f"{df.shape}")
 
 print('\n\n\n')
 
-

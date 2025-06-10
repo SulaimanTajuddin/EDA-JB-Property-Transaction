@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
+
+print("\nRaw column (existing) :\n " + f"{df.columns.tolist()}\n") #inspect column name, view any whitespace
+
+df.columns = df.columns.str.strip()
+
+print("\nColumn after stripped :\n " + f"{df.columns.tolist()}\n") # output after column stripped
+
+#Clean and convert 'Transaction Price' to numeric 
+df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False)
+df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float)
+
+#V isualize using box plot
+sns.boxplot(df['Transaction Price'])
+plt.show()
+
+# Visualize using scatter plot
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.scatter(df['Mukim'], df['Transaction Price'])
+ax.set_xlabel('(Mukim)')
+ax.set_ylabel('(Transaction Price)')
+plt.show()
+
+# Visualize using histogram
+plt.hist(df['Transaction Price'], bins=30, color='skyblue', edgecolor='black')
+plt.title('Distribution of Transaction Price')
+plt.xlabel('Transaction Price')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
