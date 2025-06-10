@@ -20,10 +20,4 @@ print("\n(Total no. of rows, Total no. of columns) = " + f"{df.shape}")
 
 print('\n\n\n')
 
-print("\nNull values (True/False):\n") 
-print(df.isnull())   # Check for null values in all cell, returns print output True/False for each cell
-
-print('\n\n\n')
-
-print("\nTotal sum of duplicated values = " + f"{df.duplicated().sum()}\n")
 

@@ -1,0 +1,21 @@
+import pandas as pd # for data manipulation and analysis
+import seaborn as sns
+
+df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
+
+df.info()
+
+print('\n\n\n')
+
+print("\nNull values (True/False):\n") 
+print(df.isnull())   # Check for null values in all cell, returns print output True/False for each cell
+
+print('\n\n\n')
+
+print("\nTotal sum of duplicated values = " + f"{df.duplicated().sum()}\n")
+
+#Clean and convert 'Transaction Price' to numeric 
+df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False)
+df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float)
+
+sns.boxplot(df['Transaction Price'])
