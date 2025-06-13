@@ -17,10 +17,6 @@ df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=Fal
 print(df.head(10))
 
 '''
-# Visualize using box plot
-sns.boxplot(df['Transaction Price'])
-plt.show()
-
 # Visualize using scatter plot
 fig, ax = plt.subplots(figsize=(6, 4))
 ax.scatter(df['Mukim'], df['Transaction Price'])
@@ -34,4 +30,13 @@ plt.title('Distribution of Transaction Price')
 plt.xlabel('Transaction Price')
 plt.ylabel('Frequency')
 plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(12,	4))
+sns.kdeplot(df['Transaction Price'], fill=True,	color='blue', alpha=0.6)
+plt.title(f'Kernel Density Estimate(KDE) - Sale Price',	fontsize=16)
+plt.xlabel('Sale Price', fontsize=12)
+plt.ylabel('Density', fontsize=12)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
 plt.show()

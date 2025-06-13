@@ -1,5 +1,6 @@
 import pandas as pd # for data manipulation and analysis
 import matplotlib.pyplot as plt # for plotting graph
+import seaborn as sns
 
 df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
 
@@ -30,6 +31,13 @@ plt.title('Distribution of Transaction Price from 2021 - 2024 ')
 plt.xlabel('Transaction Price')
 plt.ylabel('Frequency')
 plt.grid(True)
+plt.show()
+
+sns.regplot(x='Transaction Price', y='Transaction Year', data=df, line_kws={"color": "red"})
+plt.title("Regression Line: Transaction Year vs. Transaction Price")
+plt.xlabel("Transaction Price")
+plt.ylabel("Transaction Year")
+plt.tight_layout()
 plt.show()
 
 
