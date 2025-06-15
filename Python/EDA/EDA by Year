@@ -33,6 +33,7 @@ plt.ylabel('Frequency')
 plt.grid(True)
 plt.show()
 
+# Regression plot (Need to rectify)
 sns.regplot(x='Transaction Price', y='Transaction Year', data=df, line_kws={"color": "red"})
 plt.title("Regression Line: Transaction Year vs. Transaction Price")
 plt.xlabel("Transaction Price")

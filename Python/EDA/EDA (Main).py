@@ -1,5 +1,6 @@
 import pandas as pd # for data manipulation and analysis
 import numpy as np
+import missingno as msno
 import matplotlib.pyplot as plt # for plotting graph
 import seaborn as sns
 
@@ -9,11 +10,15 @@ print(df.head(),'\n\n\n')   # print output of the first n row
 
 print(df.dtypes,'\n\n\n')     # print output of the data types by column
 
+# show a bar chart of missing values
+print(msno.bar(df))
+plt.show()
+
 print("\n(Total no. of rows, Total no. of columns) = " + f"{df.shape}\n\n\n") 
 
 print("\nExisting column :\n " + f"{df.columns.tolist()}\n") # inspect column name, view any whitespace
 
-df.columns = df.columns.str.strip() # strip column that has whitespace
+df.columns = df.columns.str.strip() # remove leading/trailing spaces in column names
 
 print("\nColumn after stripped :\n" + f"{df.columns.tolist()}\n") # output after column stripped
 
@@ -90,6 +95,7 @@ plt.show()
 print(f"\nSkewness of Transaction Price: {df['Transaction Price'].skew():.2f}")
 print(f"Kurtosis of Transaction Price: {df['Transaction Price'].kurt():.2f}")
 
+# Regression plot (Need to rectify)
 sns.regplot(x='Land/Parcel Area', y='Transaction Price', data=df, line_kws={"color": "red"})
 plt.title("Regression Line: Transaction Price vs. Land/Parcel Area")
 plt.xlabel("Land/Parcel Area")

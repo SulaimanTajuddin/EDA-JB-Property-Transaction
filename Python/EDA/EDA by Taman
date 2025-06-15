@@ -1,0 +1,47 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv(r'C:\Users\sulaiman.at\Documents\GitHub\EDA-JB-Property-Transaction\Python\JB Properties Data 2021-2024(TSV).csv', sep='\t')
+
+print("\nRaw column (existing) :\n " + f"{df.columns.tolist()}\n") #inspect column name, view any whitespace
+
+df.columns = df.columns.str.strip()
+
+print("\nColumn after stripped :\n " + f"{df.columns.tolist()}\n") # output after column stripped
+
+# Clean and convert 'Transaction Price' to numeric 
+df['Transaction Price'] = df['Transaction Price'].str.replace('RM', '', regex=False)
+df['Transaction Price'] = df['Transaction Price'].str.replace(',', '', regex=False).astype(float)
+
+# Rename column name
+df.rename(columns={'Scheme Name/Area':'Taman'},inplace = True)
+df.rename(columns={'Road Name':'Jalan'},inplace = True)
+
+print("\nColumn after renamed :\n " + f"{df.columns.tolist()}\n") # output after column renamed
+
+# Filter interested Taman
+filtered_taman = df[df['Taman'].isin(['TMN KOTA MASAI'])]
+
+print(filtered_taman)
+
+print(df['Taman'],'\n\n')
+
+print(filtered_taman['Jalan'],'\n\n')
+
+# Scatterplot Jalan (Taman Kota Masai) vs Transaction Price 2021 - 2024
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.scatter(filtered_taman['Jalan'],filtered_taman['Transaction Price'])
+ax.set_xlabel('(Jalan)')
+ax.set_ylabel('(Transaction Price 2021 - 2024)')
+plt.show()
+
+filtered_taman['Transaction Year'] = filtered_taman['Month, Year of Transaction Date'].str.extract(r'(\d{4})').astype(int)
+filter_y24 = filtered_taman[filtered_taman['Transaction Year'].isin([2024])]
+
+# Scatterplot Jalan (Taman Kota Masai) vs Transaction Price in 2024
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.scatter(filter_y24['Jalan'],filter_y24['Transaction Price'])
+ax.set_xlabel('(Jalan)')
+ax.set_ylabel('(Transaction Price 2024)')
+plt.show()
