@@ -58,12 +58,29 @@ ax.set_xlabel('(Main Floor Area)')
 ax.set_ylabel('(Transaction Price)')
 plt.show()
 
-# Boxplot for detecting outliers
+# Overall numeric data Boxplot for detecting outliers
 df.select_dtypes(include='number').boxplot(figsize=(20, 8), rot=45, grid=False)
 plt.title("Boxplots of Numeric Features")
 plt.tight_layout()
 plt.show()
 
+# Boxplot for Transaction Price
+df.boxplot(column=['Transaction Price'])
+plt.title("Boxplots for Transaction Price")
+plt.tight_layout()
+plt.show()
+
+# Boxplot for Land/Parcel Area
+df.boxplot(column=['Land/Parcel Area'])
+plt.title("Boxplots for Land/Parcel Area")
+ax.set_ylim(0, 100)
+plt.show()
+
+# View outlier for Land/Parcel Area
+outlier_LandArea = df[df['Land/Parcel Area']>220000]
+print('\n\n', outlier_LandArea['Land/Parcel Area'])
+
+'''
 # Histogram
 df.hist(bins=15, figsize=(10, 6), color='red', edgecolor='black')
 plt.suptitle('Histograms of Columns', fontsize=16)
@@ -102,5 +119,5 @@ plt.xlabel("Land/Parcel Area")
 plt.ylabel("Transaction Price")
 plt.tight_layout()
 plt.show()
-
+'''
 

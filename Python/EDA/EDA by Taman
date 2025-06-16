@@ -37,11 +37,11 @@ ax.set_ylabel('(Transaction Price 2021 - 2024)')
 plt.show()
 
 filtered_taman['Transaction Year'] = filtered_taman['Month, Year of Transaction Date'].str.extract(r'(\d{4})').astype(int)
-filter_y24 = filtered_taman[filtered_taman['Transaction Year'].isin([2024])]
+filtered_taman[(filtered_taman['Transaction Year'].isin([2024]))]
 
 # Scatterplot Jalan (Taman Kota Masai) vs Transaction Price in 2024
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.scatter(filter_y24['Jalan'],filter_y24['Transaction Price'])
+ax.scatter(filtered_taman['Jalan'],filtered_taman['Transaction Price'])
 ax.set_xlabel('(Jalan)')
 ax.set_ylabel('(Transaction Price 2024)')
 plt.show()
